@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Linq2Entity.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Linq2EntityStoreContainer">
+    <EntitySet Name="USERs" EntityType="Linq2Entity.Store.USERs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ITEMs" EntityType="Linq2Entity.Store.ITEMs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PURCHASEs" EntityType="Linq2Entity.Store.PURCHASEs" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="USERPURCHASE" Association="Linq2Entity.Store.USERPURCHASE">
+      <End Role="USER" EntitySet="USERs" />
+      <End Role="PURCHASE" EntitySet="PURCHASEs" />
+    </AssociationSet>
+    <AssociationSet Name="PURCHASEITEM" Association="Linq2Entity.Store.PURCHASEITEM">
+      <End Role="PURCHASE" EntitySet="PURCHASEs" />
+      <End Role="ITEM" EntitySet="ITEMs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="USERs">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="saldo" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ITEMs">
+    <Key>
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="price" Type="smallint" Nullable="false" />
+    <Property Name="stock" Type="smallint" Nullable="false" />
+    <Property Name="PURCHASE_id" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PURCHASEs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="amount" Type="smallint" Nullable="false" />
+    <Property Name="id" Type="smallint" Nullable="false" />
+    <Property Name="USER_username" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="USERPURCHASE">
+    <End Role="USER" Type="Linq2Entity.Store.USERs" Multiplicity="1" />
+    <End Role="PURCHASE" Type="Linq2Entity.Store.PURCHASEs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="PURCHASE">
+        <PropertyRef Name="USER_username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PURCHASEITEM">
+    <End Role="PURCHASE" Type="Linq2Entity.Store.PURCHASEs" Multiplicity="1" />
+    <End Role="ITEM" Type="Linq2Entity.Store.ITEMs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PURCHASE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ITEM">
+        <PropertyRef Name="PURCHASE_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

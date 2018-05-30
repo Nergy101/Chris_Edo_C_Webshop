@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Linq2Entity" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Linq2EntityContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="USERs" EntityType="Linq2Entity.USER" />
+    <EntitySet Name="ITEMs" EntityType="Linq2Entity.ITEM" />
+    <EntitySet Name="PURCHASEs" EntityType="Linq2Entity.PURCHASE" />
+    <AssociationSet Name="USERPURCHASE" Association="Linq2Entity.USERPURCHASE">
+      <End Role="USER" EntitySet="USERs" />
+      <End Role="PURCHASE" EntitySet="PURCHASEs" />
+    </AssociationSet>
+    <AssociationSet Name="PURCHASEITEM" Association="Linq2Entity.PURCHASEITEM">
+      <End Role="PURCHASE" EntitySet="PURCHASEs" />
+      <End Role="ITEM" EntitySet="ITEMs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="50" />
+    <Property Name="password" Type="String" Nullable="false" />
+    <Property Name="saldo" Type="Double" Nullable="false" />
+    <NavigationProperty Name="PURCHASEs" Relationship="Linq2Entity.USERPURCHASE" FromRole="USER" ToRole="PURCHASE" />
+  </EntityType>
+  <EntityType Name="ITEM">
+    <Key>
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="50" />
+    <Property Name="price" Type="Int16" Nullable="false" />
+    <Property Name="stock" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="PURCHASE" Relationship="Linq2Entity.PURCHASEITEM" FromRole="ITEM" ToRole="PURCHASE" />
+    <Property Name="PURCHASE_id" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PURCHASE">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="amount" Type="Int16" Nullable="false" />
+    <Property Name="id" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="USER" Relationship="Linq2Entity.USERPURCHASE" FromRole="PURCHASE" ToRole="USER" />
+    <Property Name="USER_username" Type="String" Nullable="false" MaxLength="50" />
+    <NavigationProperty Name="ITEMs" Relationship="Linq2Entity.PURCHASEITEM" FromRole="PURCHASE" ToRole="ITEM" />
+  </EntityType>
+  <Association Name="USERPURCHASE">
+    <End Type="Linq2Entity.USER" Role="USER" Multiplicity="1" />
+    <End Type="Linq2Entity.PURCHASE" Role="PURCHASE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="PURCHASE">
+        <PropertyRef Name="USER_username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PURCHASEITEM">
+    <End Type="Linq2Entity.PURCHASE" Role="PURCHASE" Multiplicity="1" />
+    <End Type="Linq2Entity.ITEM" Role="ITEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PURCHASE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ITEM">
+        <PropertyRef Name="PURCHASE_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Linq2Entity.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Linq2EntityStoreContainer">
+    <EntitySet Name="USERs" EntityType="Linq2Entity.Store.USERs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ITEMs" EntityType="Linq2Entity.Store.ITEMs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PURCHASEs" EntityType="Linq2Entity.Store.PURCHASEs" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="USERPURCHASE" Association="Linq2Entity.Store.USERPURCHASE">
+      <End Role="USER" EntitySet="USERs" />
+      <End Role="PURCHASE" EntitySet="PURCHASEs" />
+    </AssociationSet>
+    <AssociationSet Name="PURCHASEITEM" Association="Linq2Entity.Store.PURCHASEITEM">
+      <End Role="PURCHASE" EntitySet="PURCHASEs" />
+      <End Role="ITEM" EntitySet="ITEMs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="USERs">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="saldo" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ITEMs">
+    <Key>
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="price" Type="smallint" Nullable="false" />
+    <Property Name="stock" Type="smallint" Nullable="false" />
+    <Property Name="PURCHASE_id" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PURCHASEs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="amount" Type="smallint" Nullable="false" />
+    <Property Name="id" Type="smallint" Nullable="false" />
+    <Property Name="USER_username" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="USERPURCHASE">
+    <End Role="USER" Type="Linq2Entity.Store.USERs" Multiplicity="1" />
+    <End Role="PURCHASE" Type="Linq2Entity.Store.PURCHASEs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="PURCHASE">
+        <PropertyRef Name="USER_username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PURCHASEITEM">
+    <End Role="PURCHASE" Type="Linq2Entity.Store.PURCHASEs" Multiplicity="1" />
+    <End Role="ITEM" Type="Linq2Entity.Store.ITEMs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PURCHASE">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ITEM">
+        <PropertyRef Name="PURCHASE_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Linq2Entity" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Linq2EntityContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="USERs" EntityType="Linq2Entity.USER" />
+          <EntitySet Name="ITEMs" EntityType="Linq2Entity.ITEM" />
+          <EntitySet Name="PURCHASEs" EntityType="Linq2Entity.PURCHASE" />
+          <AssociationSet Name="USERPURCHASE" Association="Linq2Entity.USERPURCHASE">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="PURCHASE" EntitySet="PURCHASEs" />
+          </AssociationSet>
+          <AssociationSet Name="PURCHASEITEM" Association="Linq2Entity.PURCHASEITEM">
+            <End Role="PURCHASE" EntitySet="PURCHASEs" />
+            <End Role="ITEM" EntitySet="ITEMs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="50" />
+          <Property Name="password" Type="String" Nullable="false" />
+          <Property Name="saldo" Type="Double" Nullable="false" />
+          <NavigationProperty Name="PURCHASEs" Relationship="Linq2Entity.USERPURCHASE" FromRole="USER" ToRole="PURCHASE" />
+        </EntityType>
+        <EntityType Name="ITEM">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="50" />
+          <Property Name="price" Type="Int16" Nullable="false" />
+          <Property Name="stock" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="PURCHASE" Relationship="Linq2Entity.PURCHASEITEM" FromRole="ITEM" ToRole="PURCHASE" />
+          <Property Name="PURCHASE_id" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PURCHASE" >
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="amount" Type="Int16" Nullable="false" />
+          <Property Name="id" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="USER" Relationship="Linq2Entity.USERPURCHASE" FromRole="PURCHASE" ToRole="USER" />
+          <Property Name="USER_username" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="ITEMs" Relationship="Linq2Entity.PURCHASEITEM" FromRole="PURCHASE" ToRole="ITEM" />
+        </EntityType>
+        <Association Name="USERPURCHASE">
+          <End Type="Linq2Entity.USER" Role="USER" Multiplicity="1" />
+          <End Type="Linq2Entity.PURCHASE" Role="PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="PURCHASE">
+              <PropertyRef Name="USER_username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PURCHASEITEM">
+          <End Type="Linq2Entity.PURCHASE" Role="PURCHASE" Multiplicity="1" />
+          <End Type="Linq2Entity.ITEM" Role="ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PURCHASE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ITEM">
+              <PropertyRef Name="PURCHASE_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Linq2EntityStoreContainer" CdmEntityContainer="Linq2EntityContainer">
+    <EntitySetMapping Name="USERs">
+      <EntityTypeMapping TypeName="IsTypeOf(Linq2Entity.USER)">
+        <MappingFragment StoreEntitySet="USERs">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="saldo" ColumnName="saldo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ITEMs">
+      <EntityTypeMapping TypeName="IsTypeOf(Linq2Entity.ITEM)">
+        <MappingFragment StoreEntitySet="ITEMs">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="PURCHASE_id" ColumnName="PURCHASE_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PURCHASEs">
+      <EntityTypeMapping TypeName="IsTypeOf(Linq2Entity.PURCHASE)">
+        <MappingFragment StoreEntitySet="PURCHASEs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="USER_username" ColumnName="USER_username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

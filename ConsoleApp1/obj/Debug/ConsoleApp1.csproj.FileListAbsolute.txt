@@ -1,0 +1,15 @@
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\EntityFramework.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\WinkelServiceLibrary.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\WinkelServiceLibrary.pdb
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\WinkelServiceLibrary.dll.config
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\EntityFramework.xml
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\obj\Debug\ConsoleApp1.csprojResolveAssemblyReference.cache
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\ConsoleApp1\obj\Debug\ConsoleApp1.pdb

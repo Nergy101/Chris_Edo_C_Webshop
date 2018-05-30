@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Linq2EntityStoreContainer" CdmEntityContainer="Linq2EntityContainer">
+    <EntitySetMapping Name="USERs">
+      <EntityTypeMapping TypeName="IsTypeOf(Linq2Entity.USER)">
+        <MappingFragment StoreEntitySet="USERs">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="saldo" ColumnName="saldo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ITEMs">
+      <EntityTypeMapping TypeName="IsTypeOf(Linq2Entity.ITEM)">
+        <MappingFragment StoreEntitySet="ITEMs">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="PURCHASE_id" ColumnName="PURCHASE_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PURCHASEs">
+      <EntityTypeMapping TypeName="IsTypeOf(Linq2Entity.PURCHASE)">
+        <MappingFragment StoreEntitySet="PURCHASEs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="USER_username" ColumnName="USER_username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
