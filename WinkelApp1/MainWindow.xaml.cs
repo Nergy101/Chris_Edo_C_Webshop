@@ -24,11 +24,6 @@ namespace WinkelApp1
     {
         public MainWindow()
         {
-            // Set the ListBox to display items in multiple columns.
-            // Set the selection mode to multiple and extended.
-            ListBox ItemList = new ListBox();
-            ItemList.SelectionMode = SelectionMode.Multiple;
-            ItemList.SelectionMode = SelectionMode.Extended;
             InitializeComponent();
         }
 
@@ -36,6 +31,63 @@ namespace WinkelApp1
         List<Item> itemList = new List<Item>();
         Item selectedItem;
         User loggedInUser;
+
+        public static string Reverse(string s)
+        {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
+
+        private void EmptyUserInventory()
+        {
+            try
+            {
+                //delete all entries
+                foreach (Purchase p in loggedInUser.PurchaseList)
+                {
+                    InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("No items to remove (yet)");
+            }
+        }
+
+        private void FillUserInventory()
+        {
+            //delete all entries
+            foreach (Purchase p in loggedInUser.PurchaseList)
+            {
+                InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+            }
+
+            //add all entries (also new ones)
+            foreach (Purchase p in loggedInUser.PurchaseList)
+            {
+                InventoryList.Items.Add($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+            }
+        }
+
+        public void fillShopInventory()
+        {
+            ItemList.SelectedItem = null;
+            selectedItem = null;
+
+            foreach (Item i in winkelService.GetItems())
+            {
+                ItemList.Items.Remove(i);
+            }
+
+            foreach (Item i in winkelService.GetItems())
+            {
+                if (i.InStore > 0)
+                {
+                    ItemList.Items.Add(i);
+                }
+            }
+        }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -61,26 +113,24 @@ namespace WinkelApp1
             }
 
         }
-        public static string Reverse(string s)
-        {
-            char[] charArray = s.ToCharArray();
-            Array.Reverse(charArray);
-            return new string(charArray);
-        }
+
 
         private void Register_Button_Click(object sender, RoutedEventArgs e)
         {
             winkelService.Register(RegisterUsername.Text, RegisterPasswordInput.Text);
+
         }
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)
         {
             if (!(LoginUsername.Text == "" || LoginPassword.Text == ""))
             {
+                EmptyUserInventory();
                 string loginName = LoginUsername.Text;
                 string loginPass = LoginPassword.Text;
                 loggedInUser = winkelService.LogIn(loginName, loginPass);
                 //if not valid returns ""
+
                 if (!(loggedInUser.Username == ""))
                 {
                     SaldoBox.Text = loggedInUser.Saldo.ToString();
@@ -88,11 +138,9 @@ namespace WinkelApp1
                     {
                         Console.WriteLine("Adding items....");
                         ResultBox.Text = ("Adding items....");
-                        foreach (Item i in winkelService.GetItems())
-                        {
-                            ItemList.Items.Add(i);
-                        }
+                        fillShopInventory();
                     }
+                    FillUserInventory();
                 }
             }
         }
@@ -115,16 +163,24 @@ namespace WinkelApp1
         {
             ItemList = e.Source as ListBox;
 
-            if (ItemList != null)
+            try
             {
-                //Console.WriteLine(ItemList.SelectedItem.ToString() + " is selected.");
-                selectedItem = (Item)ItemList.SelectedItem;
-                Console.WriteLine(selectedItem.Name + ", " + selectedItem.Price + ", " + selectedItem.InStore);
-                ResultBox.Text = (selectedItem.Name + ", prijs: " + selectedItem.Price + ", Instore: " + selectedItem.InStore);
+                if (ItemList != null)
+                {
+                    //Console.WriteLine(ItemList.SelectedItem.ToString() + " is selected.");
+                    selectedItem = (Item)ItemList.SelectedItem;
+                    Console.WriteLine(selectedItem.Name + ", " + selectedItem.Price + ", " + selectedItem.InStore);
+                    ResultBox.Text = (selectedItem.Name + ", prijs: " + selectedItem.Price + ", Instore: " + selectedItem.InStore);
+                }
+                else
+                {
+                    Console.WriteLine("value is null");
+                }
             }
-            else
+            catch (NullReferenceException)
             {
-                Console.WriteLine("value is null");
+                Console.WriteLine("There is/was no selected Item");
+                ResultBox.Text = ("There is/was no selected Item");
             }
         }
 
@@ -134,40 +190,42 @@ namespace WinkelApp1
             try
             {
                 amount = Int32.Parse(AmountBox.Text);
-                if ((selectedItem.Price * amount) <= loggedInUser.Saldo && (amount <= selectedItem.InStore) && selectedItem != null)
+                if ((amount >= 0) && (amount % 1 == 0) && (selectedItem.Price * amount) <= loggedInUser.Saldo && (amount <= selectedItem.InStore) && selectedItem != null)
                 {
+                    Purchase p = new Purchase(loggedInUser, selectedItem, amount);
+                    Console.WriteLine(p.ToString());
+                    winkelService.BuyItem(p);
 
-                    Console.WriteLine(new Purchase(loggedInUser, selectedItem, amount).ToString());
-                    winkelService.BuyItem(new Purchase(loggedInUser, selectedItem, amount));
-                    Console.WriteLine("refreshing items");
-                    ResultBox.Text = ("refreshing items");
+                    ItemList.Items.Refresh();
 
-                    ///
-                    /// Hieronder faalt nog, delete random de gekozen entry maar niet alle, en stopt er geen nieuwe in
-                    ///
-                    for (int n = ItemList.Items.Count - 1; n >= 0; --n)
-                    {
-                            ItemList.Items.RemoveAt(n);
-                    }
+                    Console.WriteLine("Purchase info: " + p.ToString());
+                    ResultBox.Text = ("Purchase info: " + p.ToString());
 
-                    foreach (Item i in winkelService.GetItems())
-                    {
-                        ItemList.Items.Add(i);
-                    }
-                    
-                    // update Saldo, mss BuyItem een User laten returnen weer?
+                    ItemList.Items.Refresh();
+
+                    SaldoBox.Text = loggedInUser.Saldo.ToString();
+
+                    InventoryList.Items.Refresh();
+
+                    FillUserInventory();
+
+                    Console.WriteLine("refreshing values");
+                    ResultBox.Text += ("\nrefreshing values");
 
                 }
                 else
                 {
-                    Console.WriteLine($"Either you dont have enough Saldo and/or there are not enough {selectedItem.Name}(s) in store");
-                    ResultBox.Text = ($"Either you dont have enough Saldo and/or there are not enough {selectedItem.Name}(s) in store");
+                    Console.WriteLine($"Either you dont have enough Saldo and/or there are not enough {selectedItem.Name}(s) in store\n" +
+                        $"Your amount must be 1 or higher and/or You can only buy complete products. Buying {amount} is not allowed!");
+
+                    ResultBox.Text = ($"Either you dont have enough Saldo and/or there are not enough {selectedItem.Name}(s) in store\n" +
+                        $"Your amount must be 1 or higher and / or You can only buy complete products. Buying { amount} is not allowed!");
                 }
             }
             catch (FormatException)
             {
-                Console.WriteLine("the amount must be a numerical value");
-                ResultBox.Text = ("the amount must be a numerical value");
+                Console.WriteLine("the amount must be a whole number");
+                ResultBox.Text = ("the amount must be a whole number");
 
             }
             catch (NullReferenceException)
@@ -186,6 +244,26 @@ namespace WinkelApp1
         private void ResultBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void On_Inventory_Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            FillUserInventory();
+        }
+
+
+
+        private void On_Click_Empty_History(object sender, RoutedEventArgs e)
+        {
+            foreach (Purchase p in loggedInUser.PurchaseList)
+            {
+                InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+            }
+        }
+
+        private void On_Click_Refresh_Store(object sender, RoutedEventArgs e)
+        {
+            fillShopInventory();
         }
     }
 }

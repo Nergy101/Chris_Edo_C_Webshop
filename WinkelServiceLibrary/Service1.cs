@@ -12,10 +12,10 @@ namespace WinkelServiceLibrary
     public class WinkelService : IWinkelService
     {
 
-        List<User> userRegister = new List<User>(); //{ new User("admin", "admin", 10.0) }
-        
-        List<Item> itemRegister = new List<Item>() { new Item("appel", 1.50, 10), new Item("peer", 2.00, 5) };
-  
+        List<User> userRegister = new List<User>() { new User("admin", "admin", 100.0, new List<Purchase>()) };
+
+        List<Item> itemRegister = new List<Item>() { new Item("appel", 1.50, 10), new Item("peer", 2.00, 5), new Item("doeken", 8.00, 20)};
+
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);
@@ -25,9 +25,19 @@ namespace WinkelServiceLibrary
         {
             try
             {
+                //check if already exists
+                foreach (User u in userRegister)
+                {
+                    if (username.Equals(u.Username) || password.Equals(u.Password))
+                    {
+                        Console.WriteLine("This username or password (combination) is already in use");
+                        throw new Exception("This username or password (combination) is already in use");
+                    }
+                }
+                //create new user
                 List<Purchase> newPurchaseList = new List<Purchase>();
 
-                User newUser = new User(username,password, 10.00,newPurchaseList);
+                User newUser = new User(username, password, 10.00, newPurchaseList);
                 userRegister.Add(newUser); // list maken werkt niet? pakt alleen eerste user
                 Console.WriteLine($"user registered: {username}, {password}");
                 var result = string.Join(",", userRegister);
@@ -36,7 +46,7 @@ namespace WinkelServiceLibrary
             }
             catch (Exception e)
             {
-                // Something unexpected went wrong.
+                // Something went wrong.
                 Console.WriteLine(e);
             }
 
@@ -44,7 +54,7 @@ namespace WinkelServiceLibrary
 
         public void BuyItem(Purchase p) //ook buyer meegeven
         {
-            Console.WriteLine("user: "+p.Buyer.ToString());
+            Console.WriteLine("user: " + p.Buyer.ToString());
             p.Buyer.PurchaseList.Add(p);
             Console.WriteLine(p.Buyer.PurchaseList.ToString());
 
@@ -82,17 +92,12 @@ namespace WinkelServiceLibrary
         {
             foreach (User u in userRegister)
             {
-                if (u.Username.Equals(username) && u.Password.Equals(password)) // fout, werkt alleen voor eerste index (?)
+                Console.WriteLine($"check: {username.Equals(u.Username) && password.Equals(u.Password)}");
+                if (username.Equals(u.Username) && password.Equals(u.Password)) // fout, werkt alleen voor eerste index (?)
                 {
                     Console.WriteLine("User logged in: " + username);
                     return (u);
                 }
-                else
-                {
-                    Console.WriteLine("Error occurred, Your login credentials are invalid!");
-                    return (new User("", "", 0.00, new List<Purchase>()));
-                }
-
             }
             Console.WriteLine("Your login credentials are invalid");
             return (new User("", "", 0.00, new List<Purchase>()));
