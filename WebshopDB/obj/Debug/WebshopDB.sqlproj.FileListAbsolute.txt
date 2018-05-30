@@ -1,0 +1,5 @@
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WebshopDB\bin\Debug\WebshopDB.dacpac
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WebshopDB\bin\Debug\WebshopDB.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WebshopDB\bin\Debug\WebshopDB.pdb
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WebshopDB\obj\Debug\WebshopDB.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WebshopDB\obj\Debug\WebshopDB.pdb

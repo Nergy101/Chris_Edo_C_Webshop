@@ -1,0 +1,15 @@
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\obj\Debug\netcoreapp2.0\dbconnectionApp.csprojResolveAssemblyReference.cache
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\obj\Debug\netcoreapp2.0\dbconnectionApp.csproj.CoreCompileInputs.cache
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\obj\Debug\netcoreapp2.0\dbconnectionApp.AssemblyInfoInputs.cache
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\obj\Debug\netcoreapp2.0\dbconnectionApp.AssemblyInfo.cs
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\bin\Debug\netcoreapp2.0\dbconnectionApp.deps.json
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\bin\Debug\netcoreapp2.0\dbconnectionApp.runtimeconfig.json
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\bin\Debug\netcoreapp2.0\dbconnectionApp.runtimeconfig.dev.json
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\bin\Debug\netcoreapp2.0\dbconnectionApp.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\bin\Debug\netcoreapp2.0\dbconnectionApp.pdb
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\bin\Debug\netcoreapp2.0\WinkelServiceLibrary.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\bin\Debug\netcoreapp2.0\WinkelServiceLibrary.pdb
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\bin\Debug\netcoreapp2.0\WinkelServiceLibrary.dll.config
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\obj\Debug\netcoreapp2.0\dbconnectionApp.csproj.CopyComplete
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\obj\Debug\netcoreapp2.0\dbconnectionApp.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\dbconnectionApp\obj\Debug\netcoreapp2.0\dbconnectionApp.pdb

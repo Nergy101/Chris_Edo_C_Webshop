@@ -5,3 +5,12 @@ C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\
 C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.csproj.CoreCompileInputs.cache
 C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.dll
 C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.pdb
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.pdb
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\bin\Debug\WinkelServiceLibrary.dll.config
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\bin\Debug\WinkelServiceLibrary.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\bin\Debug\WinkelServiceLibrary.pdb
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\bin\Debug\System.Data.SqlClient.dll
+C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.csproj.CopyComplete
