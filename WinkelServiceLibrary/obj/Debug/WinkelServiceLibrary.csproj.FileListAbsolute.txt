@@ -1,0 +1,7 @@
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\bin\Debug\WinkelServiceLibrary.dll.config
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\bin\Debug\WinkelServiceLibrary.dll
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\bin\Debug\WinkelServiceLibrary.pdb
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.csprojAssemblyReference.cache
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.csproj.CoreCompileInputs.cache
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.dll
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.pdb
