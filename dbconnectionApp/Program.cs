@@ -9,7 +9,7 @@ namespace dbconnectionApp
         static void Main(string[] args)
         {
             LocalDAO derp = new WinkelServiceLibrary.LocalDAO();
-            derp.DikkeDoei();
+            derp.test123();
             
         }
     }

@@ -8,9 +8,9 @@ namespace WinkelServiceLibrary
     public class LocalDAO
     {
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        //CREATE TABLE[PURCHASE] ([NAME] varchar ,[ITEM] varchar, [AMOUNT] int, FOREIGN KEY([NAME]) REFERENCES[USER] ([USERNAME]),FOREIGN KEY([ITEM]) REFERENCES[ITEM] ([NAME]));
-        //CREATE TABLE[ITEM] ([NAME] varchar,[PRICE] float,[InStore] int, PRIMARY KEY([NAME]));
-        //CREATE TABLE[USER]([username] varchar, [password] varchar, [saldo] float, PRIMARY KEY([username]));
+        //--CREATE TABLE[PURCHASE] ([NAME] varchar(255) ,[ITEM] varchar(255), [AMOUNT] int, FOREIGN KEY([NAME]) REFERENCES[USER] ([USERNAME]),FOREIGN KEY([ITEM]) REFERENCES[ITEM] ([NAME]));
+        //--CREATE TABLE[ITEM] ([NAME] varchar(255),[PRICE] float (53),[InStore] int, PRIMARY KEY([NAME]));
+        //--CREATE TABLE[USER]([username] varchar(255), [password] varchar(255), [saldo] float (53), PRIMARY KEY([username]));
 
         public void test123()
         {
