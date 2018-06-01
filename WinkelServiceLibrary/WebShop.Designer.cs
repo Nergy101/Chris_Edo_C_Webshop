@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\WebShop.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

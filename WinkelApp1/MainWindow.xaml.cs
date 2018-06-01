@@ -43,11 +43,16 @@ namespace WinkelApp1
         {
             try
             {
+                //using (WebShopContainer ctx = new WebShopContainer())
+                //{
+                //    ctx.Database.ExecuteSqlCommand("");
+                //        dbContext.Database.ExecuteSqlCommand("delete from MyTable");
+                //}
                 //delete all entries
-                foreach (Purchase p in loggedInUser.PurchaseList)
-                {
-                    InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
-                }
+                //foreach (Purchase p in loggedInUser.PurchaseList)
+                //{
+                //    InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+                //}
             }
             catch
             {
@@ -58,16 +63,16 @@ namespace WinkelApp1
         private void FillUserInventory()
         {
             //delete all entries
-            foreach (Purchase p in loggedInUser.PurchaseList)
-            {
-                InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
-            }
+            //foreach (Purchase p in loggedInUser.PurchaseList)
+            //{
+            //    InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+            //}
 
-            //add all entries (also new ones)
-            foreach (Purchase p in loggedInUser.PurchaseList)
-            {
-                InventoryList.Items.Add($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
-            }
+            ////add all entries (also new ones)
+            //foreach (Purchase p in loggedInUser.PurchaseList)
+            //{
+            //    InventoryList.Items.Add($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+            //}
         }
 
         public void fillShopInventory()
@@ -77,12 +82,12 @@ namespace WinkelApp1
 
             foreach (Item i in winkelService.GetItems())
             {
-                ItemList.Items.Remove(i);
+                ItemList.Items.Clear();
             }
 
             foreach (Item i in winkelService.GetItems())
             {
-                if (i.InStore > 0)
+                if (i.Stock > 0)
                 {
                     ItemList.Items.Add(i);
                 }
@@ -169,8 +174,8 @@ namespace WinkelApp1
                 {
                     //Console.WriteLine(ItemList.SelectedItem.ToString() + " is selected.");
                     selectedItem = (Item)ItemList.SelectedItem;
-                    Console.WriteLine(selectedItem.Name + ", " + selectedItem.Price + ", " + selectedItem.InStore);
-                    ResultBox.Text = (selectedItem.Name + ", prijs: " + selectedItem.Price + ", Instore: " + selectedItem.InStore);
+                    Console.WriteLine(selectedItem.Name + ", " + selectedItem.Price + ", " + selectedItem.Stock);
+                    ResultBox.Text = (selectedItem.Name + ", prijs: " + selectedItem.Price + ", Instore: " + selectedItem.Stock);
                 }
                 else
                 {
@@ -190,9 +195,17 @@ namespace WinkelApp1
             try
             {
                 amount = Int32.Parse(AmountBox.Text);
-                if ((amount >= 0) && (amount % 1 == 0) && (selectedItem.Price * amount) <= loggedInUser.Saldo && (amount <= selectedItem.InStore) && selectedItem != null)
+                Console.WriteLine(amount);
+                Console.WriteLine(selectedItem.Price);
+                Console.WriteLine(loggedInUser.Saldo);
+                if ((amount >= 0) && (amount % 1 == 0) && (selectedItem.Price * amount) <= loggedInUser.Saldo && (amount <= selectedItem.Stock) && selectedItem != null)
                 {
-                    Purchase p = new Purchase(loggedInUser, selectedItem, amount);
+                    Purchase p = new Purchase();
+                    p.User = loggedInUser;
+                    p.Item = selectedItem;
+                    p.Amount = (Int16)amount;
+                    p.UserUsername = loggedInUser.Username;
+                    p.ItemName = selectedItem.Name;
                     Console.WriteLine(p.ToString());
                     winkelService.BuyItem(p);
 
@@ -228,9 +241,9 @@ namespace WinkelApp1
                 ResultBox.Text = ("the amount must be a whole number");
 
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException f)
             {
-                Console.WriteLine("You must first select an item to buy");
+                Console.WriteLine("You must first select an item to buy" + f);
                 ResultBox.Text = ("You must first select an item to buy");
             }
 
@@ -255,10 +268,10 @@ namespace WinkelApp1
 
         private void On_Click_Empty_History(object sender, RoutedEventArgs e)
         {
-            foreach (Purchase p in loggedInUser.PurchaseList)
-            {
-                InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
-            }
+            //foreach (Purchase p in loggedInUser.PurchaseList)
+            //{
+            //    InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+            //}
         }
 
         private void On_Click_Refresh_Store(object sender, RoutedEventArgs e)

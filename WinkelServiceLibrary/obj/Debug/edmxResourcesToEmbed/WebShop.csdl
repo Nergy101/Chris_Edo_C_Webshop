@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="WebShop" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="WebShopContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="WebShop.User" />
+    <EntitySet Name="Items" EntityType="WebShop.Item" />
+    <EntitySet Name="Purchases" EntityType="WebShop.Purchase" />
+    <AssociationSet Name="UserPurchase" Association="WebShop.UserPurchase">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="ItemPurchase" Association="WebShop.ItemPurchase">
+      <End Role="Item" EntitySet="Items" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="50" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <Property Name="Saldo" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Purchases" Relationship="WebShop.UserPurchase" FromRole="User" ToRole="Purchase" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="50" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Stock" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Purchases" Relationship="WebShop.ItemPurchase" FromRole="Item" ToRole="Purchase" />
+  </EntityType>
+  <EntityType Name="Purchase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="User" Relationship="WebShop.UserPurchase" FromRole="Purchase" ToRole="User" />
+    <Property Name="UserUsername" Type="String" Nullable="false" MaxLength="50" />
+    <Property Name="Amount" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Item" Relationship="WebShop.ItemPurchase" FromRole="Purchase" ToRole="Item" />
+    <Property Name="ItemName" Type="String" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="UserPurchase">
+    <End Type="WebShop.User" Role="User" Multiplicity="1" />
+    <End Type="WebShop.Purchase" Role="Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="UserUsername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ItemPurchase">
+    <End Type="WebShop.Item" Role="Item" Multiplicity="1" />
+    <End Type="WebShop.Purchase" Role="Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="ItemName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
