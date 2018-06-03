@@ -23,9 +23,7 @@ namespace WinkelServiceLibrary
         /// hieronder nog in de maak
         /// </summary>
         [OperationContract]
-        void BuyItem(Purchase p);
-        [OperationContract]
-        List<Purchase> getUserInventory(User u);
+        User BuyItem(Purchase p, User u);
 
         //[OperationContract]
         //CompositeType GetDataUsingDataContract(CompositeType composite);

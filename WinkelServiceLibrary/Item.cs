@@ -22,13 +22,20 @@ namespace WinkelServiceLibrary
             this.Purchases = new HashSet<Purchase>();
         }
 
+        public override string ToString()
+        {
+            return $"{ Name }, price: { Price }, #inStock: { Stock } ";
+        }
+
         [DataMember]
         public string Name { get; set; }
         [DataMember]
         public double Price { get; set; }
         [DataMember]
         public short Stock { get; set; }
-    
+
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
     }

@@ -16,16 +16,19 @@ namespace WinkelServiceLibrary
     [DataContract]
     public partial class User
     {
+        private int v;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
             this.Purchases = new HashSet<Purchase>();
         }
 
-        public User(string username, string password)
+        public User(string username, string password, int saldo)
         {
-            Username = username;
-            Password = password;
+            this.Username = username;
+            this.Password = password;
+            this.Saldo = saldo;
         }
 
         [DataMember]
@@ -36,6 +39,6 @@ namespace WinkelServiceLibrary
         public double Saldo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Purchase> Purchases { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
     }
 }

@@ -39,40 +39,45 @@ namespace WinkelApp1
             return new string(charArray);
         }
 
-        private void EmptyUserInventory()
-        {
-            try
-            {
-                //using (WebShopContainer ctx = new WebShopContainer())
-                //{
-                //    ctx.Database.ExecuteSqlCommand("");
-                //        dbContext.Database.ExecuteSqlCommand("delete from MyTable");
-                //}
-                //delete all entries
-                //foreach (Purchase p in loggedInUser.PurchaseList)
-                //{
-                //    InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
-                //}
-            }
-            catch
-            {
-                Console.WriteLine("No items to remove (yet)");
-            }
-        }
+        //private void EmptyUserInventory()
+        //{
+        //    try
+        //    {
+        //        //using (WebShopContainer ctx = new WebShopContainer())
+        //        //{
+        //        //    ctx.Database.ExecuteSqlCommand("");
+        //        //        dbContext.Database.ExecuteSqlCommand("delete from MyTable");
+        //        //}
+        //        //delete all entries
+        //        //foreach (Purchase p in loggedInUser.PurchaseList)
+        //        //{
+        //        //    InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+        //        //}
+        //    }
+        //    catch
+        //    {
+        //        Console.WriteLine("No items to remove (yet)");
+        //    }
+        //}
 
         private void FillUserInventory()
         {
-            //delete all entries
-            //foreach (Purchase p in loggedInUser.PurchaseList)
+            //List<Purchase> purchases = winkelService.GetUserInventory(loggedInUser);
+            //foreach (Purchase p in purchases)
             //{
-            //    InventoryList.Items.Remove($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+            //    Console.WriteLine(p.ItemName);
+            //    InventoryList.Items.Remove($"Item bought: {p.ItemName} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
             //}
 
-            ////add all entries (also new ones)
-            //foreach (Purchase p in loggedInUser.PurchaseList)
-            //{
-            //    InventoryList.Items.Add($"Item bought: {p.Item.Name} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
-            //}
+            //delete all entries
+            InventoryList.Items.Clear();
+
+            //add all entries (also new ones)
+            foreach (Purchase p in loggedInUser.Purchases)
+                {
+                //Console.WriteLine(p.ItemName);
+                InventoryList.Items.Add($"Item bought: {p.ItemName} \nAmount bought: {p.Amount}, Price: {p.Item.Price} \nTotal Price: {p.Item.Price * p.Amount}");
+            }
         }
 
         public void fillShopInventory()
@@ -80,10 +85,11 @@ namespace WinkelApp1
             ItemList.SelectedItem = null;
             selectedItem = null;
 
-            foreach (Item i in winkelService.GetItems())
-            {
-                ItemList.Items.Clear();
-            }
+            //foreach (Item i in winkelService.GetItems())
+            //{
+            //    ItemList.Items.Remove(i);
+            //}
+            ItemList.Items.Clear();
 
             foreach (Item i in winkelService.GetItems())
             {
@@ -107,9 +113,10 @@ namespace WinkelApp1
 
         private void RegisterUsernameHandler(object sender, TextChangedEventArgs e)
         {
-            string text = RegisterUsername.Text;
+
             try
             {
+                string text = RegisterUsername.Text;
                 RegisterPasswordInput.Text = Reverse(text);
             }
             catch (NullReferenceException a)
@@ -130,7 +137,7 @@ namespace WinkelApp1
         {
             if (!(LoginUsername.Text == "" || LoginPassword.Text == ""))
             {
-                EmptyUserInventory();
+                //EmptyUserInventory();
                 string loginName = LoginUsername.Text;
                 string loginPass = LoginPassword.Text;
                 loggedInUser = winkelService.LogIn(loginName, loginPass);
@@ -191,10 +198,9 @@ namespace WinkelApp1
 
         private void OnPurchaseClick(object sender, RoutedEventArgs e)
         {
-            int amount;
             try
             {
-                amount = Int32.Parse(AmountBox.Text);
+                int amount = Int32.Parse(AmountBox.Text);
                 Console.WriteLine(amount);
                 Console.WriteLine(selectedItem.Price);
                 Console.WriteLine(loggedInUser.Saldo);
@@ -207,7 +213,7 @@ namespace WinkelApp1
                     p.UserUsername = loggedInUser.Username;
                     p.ItemName = selectedItem.Name;
                     Console.WriteLine(p.ToString());
-                    winkelService.BuyItem(p);
+                    loggedInUser = winkelService.BuyItem(p, loggedInUser);
 
                     ItemList.Items.Refresh();
 
