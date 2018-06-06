@@ -52,8 +52,15 @@ namespace WinkelServiceLibrary
                 Item ctxItem = ctx.Items.Find(p.ItemName);
                 ctxItem.Stock -= p.Amount;
                 ctx.SaveChanges();
-                u.Purchases.Add(p);
-                return u;
+                try
+                {//C#
+                    u.Purchases.Add(p);
+                }
+                catch
+                {//JAVA
+                    return u;
+                }
+                    return u;
             }
         }
 

@@ -22,6 +22,7 @@ namespace WinkelServiceLibrary
             this.Purchases = new HashSet<Purchase>();
         }
 
+
         public override string ToString()
         {
             return $"{ Name }, price: { Price }, #inStock: { Stock } ";
@@ -35,7 +36,7 @@ namespace WinkelServiceLibrary
         public short Stock { get; set; }
 
 
-
+        [DataMember]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
     }

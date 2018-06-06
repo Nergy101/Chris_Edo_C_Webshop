@@ -40,3 +40,7 @@ C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelApp1\bin\Debug\EntityFramewo
 C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelApp1\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelApp1\bin\Debug\EntityFramework.xml
 C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelApp1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelApp1\bin\Debug\EntityFramework.dll
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelApp1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelApp1\bin\Debug\EntityFramework.xml
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelApp1\bin\Debug\EntityFramework.SqlServer.xml

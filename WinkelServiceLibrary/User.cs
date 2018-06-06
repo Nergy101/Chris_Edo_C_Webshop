@@ -38,6 +38,7 @@ namespace WinkelServiceLibrary
         [DataMember]
         public double Saldo { get; set; }
     
+        [DataMember]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<Purchase> Purchases { get; set; }
     }

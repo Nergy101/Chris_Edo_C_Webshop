@@ -230,6 +230,7 @@ namespace WinkelApp1
 
                     Console.WriteLine("refreshing values");
                     ResultBox.Text += ("\nrefreshing values");
+                    fillShopInventory();
 
                 }
                 else

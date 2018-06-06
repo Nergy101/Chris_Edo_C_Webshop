@@ -39,8 +39,8 @@ namespace WinkelServiceLibrary
         public short Amount { get; set; }
         [DataMember]
         public string ItemName { get; set; }
-    
         public virtual User User { get; set; }
+        [DataMember]
         public virtual Item Item { get; set; }
     }
 }

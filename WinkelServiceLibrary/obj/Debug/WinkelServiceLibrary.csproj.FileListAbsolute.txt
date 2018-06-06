@@ -18,3 +18,9 @@ C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\bin\Debug\Ent
 C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\bin\Debug\EntityFramework.xml
 C:\Users\Edo\source\repos\Chris_Edo_C_Webshop\WinkelServiceLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\bin\Debug\EntityFramework.dll
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\bin\Debug\System.Data.SqlClient.dll
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\bin\Debug\EntityFramework.xml
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\chris\source\repos\WinkelServiceLibrary\WinkelServiceLibrary\obj\Debug\WinkelServiceLibrary.csproj.CopyComplete
