@@ -42,25 +42,31 @@ namespace WinkelServiceLibrary
         {
             using (WebShopContainer ctx = new WebShopContainer())
             {
-                u.Saldo -= p.Item.Price;
                 Purchase pur = new Purchase();
                 pur.Id = p.Id;
                 pur.Amount = p.Amount;
                 pur.ItemName = p.ItemName;
                 pur.UserUsername = u.Username;
-                ctx.Purchases.Add(pur);
+                User ctxUser = ctx.Users.Find(u.Username);
+                ctxUser.Saldo -= p.Item.Price;
+                ctxUser.Purchases.Add(pur);
                 Item ctxItem = ctx.Items.Find(p.ItemName);
                 ctxItem.Stock -= p.Amount;
                 ctx.SaveChanges();
-                try
-                {//C#
-                    u.Purchases.Add(p);
-                }
-                catch
-                {//JAVA
-                    return u;
-                }
-                    return u;
+
+                //try
+                //{//C#
+                //    u.Purchases.Add(p);
+                //}
+                //catch
+                //{//JAVA
+                //    return u;
+                //}
+                //    return u;
+
+                u.Purchases.Add(p);
+                u.Saldo -= p.Item.Price;
+                return u;
             }
         }
 
